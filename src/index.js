@@ -9,6 +9,10 @@ const viewport = {
     getters: {
     },
     mutations: {
+        measure(state) {
+            state.width = window.innerWidth;
+            state.height = window.innerHeight;
+        },
     },
     actions: {
     },
@@ -16,4 +20,12 @@ const viewport = {
 
 export {
     viewport,
+};
+
+export function viewportPlugin() {
+    return (store) => {
+        window.addEventListener('resize', () => {
+            store.commit('viewport/measure');
+        });
+    };
 };
