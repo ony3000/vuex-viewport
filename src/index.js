@@ -27,6 +27,7 @@ exports.viewportPlugin = function () {
         };
         const debouncedMeasure = debounce(instantMeasure, 200, {maxWait: 1000});
 
+        instantMeasure();
         window.addEventListener('resize', debouncedMeasure);
     };
 };
