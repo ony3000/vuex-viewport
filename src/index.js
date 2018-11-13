@@ -1,3 +1,5 @@
+import debounce from 'lodash/debounce';
+
 exports.viewport = {
     namespaced: true,
     state() {
@@ -20,8 +22,11 @@ exports.viewport = {
 
 exports.viewportPlugin = function () {
     return (store) => {
-        window.addEventListener('resize', () => {
+        const instantMeasure = () => {
             store.commit('viewport/measure');
-        });
+        };
+        const debouncedMeasure = debounce(instantMeasure, 200, {maxWait: 1000});
+
+        window.addEventListener('resize', debouncedMeasure);
     };
 };
