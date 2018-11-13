@@ -1,4 +1,4 @@
-const viewport = {
+exports.viewport = {
     namespaced: true,
     state() {
         return {
@@ -18,11 +18,7 @@ const viewport = {
     },
 };
 
-export {
-    viewport,
-};
-
-export function viewportPlugin() {
+exports.viewportPlugin = function () {
     return (store) => {
         window.addEventListener('resize', () => {
             store.commit('viewport/measure');
