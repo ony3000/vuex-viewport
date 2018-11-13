@@ -22,5 +22,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ony3000/vuex-viewport/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
   }
 }
