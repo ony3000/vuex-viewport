@@ -25,7 +25,7 @@ const storeModule = viewport;
 // `viewport` is deprecated. It will remove later.
 export { storeModule, viewport };
 
-export function viewportPlugin() {
+function viewportPlugin() {
     return (store) => {
         const instantMeasure = () => {
             store.commit('viewport/measure');
@@ -36,3 +36,8 @@ export function viewportPlugin() {
         window.addEventListener('resize', debouncedMeasure);
     };
 };
+
+const createPlugin = viewportPlugin;
+
+// `viewportPlugin` is deprecated. It will remove later.
+export { createPlugin, viewportPlugin };
