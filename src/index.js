@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce';
 
-exports.viewport = {
+const viewport = {
     namespaced: true,
     state() {
         return {
@@ -20,7 +20,9 @@ exports.viewport = {
     },
 };
 
-exports.viewportPlugin = function () {
+export { viewport };
+
+export function viewportPlugin() {
     return (store) => {
         const instantMeasure = () => {
             store.commit('viewport/measure');
