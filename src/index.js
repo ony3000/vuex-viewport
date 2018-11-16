@@ -20,7 +20,10 @@ const viewport = {
     },
 };
 
-export { viewport };
+const storeModule = viewport;
+
+// `viewport` is deprecated. It will remove later.
+export { storeModule, viewport };
 
 export function viewportPlugin() {
     return (store) => {
