@@ -4,7 +4,7 @@ import { storeModule, createPlugin } from 'vuex-viewport';
 
 Vue.use(Vuex);
 
-var store = new Vuex.Store({
+const store = new Vuex.Store({
     modules: {
         viewport: storeModule
     },
