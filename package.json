@@ -1,6 +1,6 @@
 {
   "name": "vuex-viewport",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vuex extension that allows making window size as computed property.",
   "main": "dist/vuex-viewport.js",
   "scripts": {
