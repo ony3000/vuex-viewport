@@ -10,21 +10,26 @@ npm install vuex-viewport
 ```
 
 ## Usage
-1. Add a module and plugin to your store.
+1. Add a module and plugin to your store.  
+:warning: The name of exports has been changed. You can use existing name, but it will be removed later.
+   - `viewport` has been changed to `storeModule`.
+   - `viewportPlugin` has been changed to `createPlugin`.
+
 ```javascript
-import { viewport, viewportPlugin } from 'vuex-viewport';
+import { storeModule, createPlugin } from 'vuex-viewport';
 
 const store = new Vuex.Store({
   modules: {
-    viewport
+    viewport: storeModule
   },
   plugins: [
-    viewportPlugin()
+    createPlugin()
   ]
 });
 ```
 
 2. Use computed property where necessary. You can also use `mapState` helper.
+
 ```javascript
 import { mapState } from 'vuex';
 
