@@ -24,14 +24,22 @@ const store = new Vuex.Store({
 });
 ```
 
-2. Use `mapState` helper where computed property needed.
+2. Use computed property where necessary. You can also use `mapState` helper.
 ```javascript
 import { mapState } from 'vuex';
 
 computed: {
+  windowWidth() {
+    return this.$store.state.viewport.width;
+  },
   ...mapState({
-    windowWidth: state => state.viewport.width,
     windowHeight: state => state.viewport.height
   })
 }
 ```
+
+## Usage examples
+The first example does not require a separate configuration, and the rest requires module bundler.
+- [Loading library via script tag](https://github.com/ony3000/vuex-viewport/blob/master/examples/old-school.html)
+- [CommonJS module require](https://github.com/ony3000/vuex-viewport/blob/master/examples/common.js)
+- [ES2015 module import](https://github.com/ony3000/vuex-viewport/blob/master/examples/esm.js) - This example uses `mapState` helper.
