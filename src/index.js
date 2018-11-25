@@ -1,5 +1,17 @@
 import debounce from 'lodash/debounce';
 
+// bootstrap-inspired breakpoints.
+const breakpoints = [
+    {
+        boundary: 992,
+        name: 'desktop',
+    },
+    {
+        boundary: 768,
+        name: 'tablet',
+    },
+];
+
 const storeModule = {
     namespaced: true,
     state() {
@@ -9,6 +21,13 @@ const storeModule = {
         };
     },
     getters: {
+        type(state) {
+            const section = breakpoints.find((breakpoint) => {
+                return breakpoint.boundary <= state.width;
+            });
+
+            return (section ? section.name : 'mobile');
+        },
     },
     mutations: {
         measure(state) {
