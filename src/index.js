@@ -25,7 +25,7 @@ const viewport = storeModule;
 // `viewport` is deprecated. It will remove later.
 export { storeModule, viewport };
 
-function createPlugin() {
+const createPlugin = () => {
     return (store) => {
         const instantMeasure = () => {
             store.commit('viewport/measure');
