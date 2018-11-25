@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce';
 
-const viewport = {
+const storeModule = {
     namespaced: true,
     state() {
         return {
@@ -20,12 +20,12 @@ const viewport = {
     },
 };
 
-const storeModule = viewport;
+const viewport = storeModule;
 
 // `viewport` is deprecated. It will remove later.
 export { storeModule, viewport };
 
-function viewportPlugin() {
+function createPlugin() {
     return (store) => {
         const instantMeasure = () => {
             store.commit('viewport/measure');
@@ -37,7 +37,7 @@ function viewportPlugin() {
     };
 };
 
-const createPlugin = viewportPlugin;
+const viewportPlugin = createPlugin;
 
 // `viewportPlugin` is deprecated. It will remove later.
 export { createPlugin, viewportPlugin };
