@@ -44,12 +44,15 @@ const viewport = storeModule;
 // `viewport` is deprecated. It will remove later.
 export { storeModule, viewport };
 
-const createPlugin = () => {
+const createPlugin = (options = {}) => {
+    const wait = Number(options.delay) || 200;
+    const maxWait = Number(options.maxDelay) || 1000;
+
     return (store) => {
         const instantMeasure = () => {
             store.commit('viewport/measure');
         };
-        const debouncedMeasure = debounce(instantMeasure, 200, {maxWait: 1000});
+        const debouncedMeasure = debounce(instantMeasure, wait, {maxWait});
 
         instantMeasure();
         window.addEventListener('resize', debouncedMeasure);
