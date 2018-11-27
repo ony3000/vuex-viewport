@@ -1,7 +1,7 @@
 import debounce from 'lodash/debounce';
 
 // bootstrap-inspired breakpoints.
-const breakpoints = [
+let breakpoints = [
     {
         boundary: 992,
         name: 'desktop',
@@ -47,6 +47,29 @@ export { storeModule, viewport };
 const createPlugin = (options = {}) => {
     const wait = Number(options.delay) || 200;
     const maxWait = Number(options.maxDelay) || 1000;
+    const points = options.breakpoints || {};
+    const isValidBoundary = (value) => {
+        return (value >= 0 && value < Infinity);
+    };
+    const customBreakpoints = [];
+
+    Object.keys(points).forEach((name) => {
+        const boundary = points[name];
+
+        if (boundary.constructor !== Number) {
+            throw new TypeError('Breakpoint should be a numeric value.');
+        } else if (!isValidBoundary(boundary)) {
+            throw new RangeError('Breakpoint should be a non-negative finite value.');
+        } else {
+            customBreakpoints.push({boundary, name});
+        }
+    });
+    if (customBreakpoints.length > 0) {
+        customBreakpoints.sort((former, latter) => {
+            return (latter.boundary - former.boundary);
+        });
+        breakpoints = customBreakpoints;
+    }
 
     return (store) => {
         const instantMeasure = () => {
