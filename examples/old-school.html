@@ -7,26 +7,39 @@
     <title>Example with script tag</title>
     <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
-    <script src="https://unpkg.com/vuex-viewport@1.0.1/dist/vuex-viewport.js"></script>
+    <script src="https://unpkg.com/vuex-viewport@latest/dist/vuex-viewport.js"></script>
 </head>
 <body>
     <div id="app">
+        <p>Layout type: {{ layoutType }}</p>
         <p>Window size: {{ windowWidth }} x {{ windowHeight }}</p>
     </div>
     <script>
     window.addEventListener('load', function () {
+        var pluginOptions = {
+            delay: 200,
+            maxDelay: 1000,
+            breakpoints: {
+                tablet: 768,
+                desktop: 992,
+                largeDesktop: 1200
+            }
+        };
         var store = new Vuex.Store({
             modules: {
                 viewport: vuexViewport.storeModule
             },
             plugins: [
-                vuexViewport.createPlugin()
+                vuexViewport.createPlugin(pluginOptions)
             ]
         });
         new Vue({
             el: '#app',
             store: store,
             computed: {
+                layoutType: function () {
+                    return this.$store.getters['viewport/mediaName'];
+                },
                 windowWidth: function () {
                     return this.$store.state.viewport.width;
                 },
