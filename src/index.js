@@ -4,11 +4,11 @@ import debounce from 'lodash/debounce';
 let breakpoints = [
     {
         boundary: 992,
-        name: 'desktop',
+        mediaName: 'desktop',
     },
     {
         boundary: 768,
-        name: 'tablet',
+        mediaName: 'tablet',
     },
 ];
 
@@ -21,12 +21,12 @@ const storeModule = {
         };
     },
     getters: {
-        type(state) {
+        mediaName(state) {
             const section = breakpoints.find((breakpoint) => {
                 return breakpoint.boundary <= state.width;
             });
 
-            return (section ? section.name : 'mobile');
+            return (section ? section.mediaName : 'mobile');
         },
     },
     mutations: {
@@ -53,15 +53,15 @@ const createPlugin = (options = {}) => {
     };
     const customBreakpoints = [];
 
-    Object.keys(points).forEach((name) => {
-        const boundary = points[name];
+    Object.keys(points).forEach((mediaName) => {
+        const boundary = points[mediaName];
 
         if (boundary.constructor !== Number) {
             throw new TypeError('Breakpoint should be a numeric value.');
         } else if (!isValidBoundary(boundary)) {
             throw new RangeError('Breakpoint should be a non-negative finite value.');
         } else {
-            customBreakpoints.push({boundary, name});
+            customBreakpoints.push({boundary, mediaName});
         }
     });
     if (customBreakpoints.length > 0) {
