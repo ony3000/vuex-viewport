@@ -41,9 +41,6 @@ const storeModule = {
 
 const viewport = storeModule;
 
-// `viewport` is deprecated. It will remove later.
-export { storeModule, viewport };
-
 const createPlugin = (options = {}) => {
     const wait = Number(options.delay) || 200;
     const maxWait = Number(options.maxDelay) || 1000;
@@ -84,5 +81,11 @@ const createPlugin = (options = {}) => {
 
 const viewportPlugin = createPlugin;
 
-// `viewportPlugin` is deprecated. It will remove later.
-export { createPlugin, viewportPlugin };
+export {
+    storeModule,
+    createPlugin,
+
+    // Following exports are deprecated. It will remove later.
+    viewport,
+    viewportPlugin,
+};
