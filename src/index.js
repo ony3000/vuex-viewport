@@ -89,3 +89,12 @@ export {
     viewport,
     viewportPlugin,
 };
+
+export default {
+    storeModule,
+    createPlugin,
+
+    // Following exports are deprecated. It will remove later.
+    viewport,
+    viewportPlugin,
+};
