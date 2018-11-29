@@ -30,3 +30,6 @@ The first example does not require a separate configuration, and the rest requir
 - [Loading library via script tag](https://github.com/ony3000/vuex-viewport/blob/master/examples/old-school.html)
 - [CommonJS module require](https://github.com/ony3000/vuex-viewport/blob/master/examples/common.js)
 - [ES2015 module import](https://github.com/ony3000/vuex-viewport/blob/master/examples/esm.js) - This example uses `mapState` helper and  `mapGetters` helper.
+
+## License
+[MIT License](https://github.com/ony3000/vuex-viewport/blob/master/LICENSE)
