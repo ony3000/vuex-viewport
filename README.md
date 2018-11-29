@@ -4,9 +4,20 @@ Vuex extension that allows making window size as computed property.
 ## Requirement
 - Vuex 2.3.0+
 
-## Install
+## Installation
+### CDN
+```html
+<script src="https://unpkg.com/vuex-viewport@latest/dist/vuex-viewport.js"></script>
 ```
+
+### NPM
+```sh
 npm install vuex-viewport
+```
+
+### Yarn
+```sh
+yarn add vuex-viewport
 ```
 
 ## Usage
