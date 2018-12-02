@@ -18,7 +18,9 @@
     "computed",
     "window",
     "width",
-    "height"
+    "height",
+    "breakpoint",
+    "mediaquery"
   ],
   "author": "Hyeonjong <nianelo4@gmail.com>",
   "license": "MIT",
