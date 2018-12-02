@@ -106,5 +106,13 @@ The first example does not require a separate configuration, and the rest requir
 - [CommonJS module require](https://github.com/ony3000/vuex-viewport/blob/master/examples/common.js)
 - [ES2015 module import](https://github.com/ony3000/vuex-viewport/blob/master/examples/esm.js) - This example uses `mapState` helper and  `mapGetters` helper.
 
+## Caveat
+There are other exports named `viewport` and `viewportPlugin`.  
+These are the same as `storeModule` and `createPlugin`, respectively.
+
+If you using CDN, you can refer to `vuexViewport.viewport` and `vuexViewport.viewportPlugin`, respectively.  
+But I think this notation is bad.  
+Therefore, I encourage use `storeModule` and `createPlugin`.
+
 ## License
 [MIT License](https://github.com/ony3000/vuex-viewport/blob/master/LICENSE)
