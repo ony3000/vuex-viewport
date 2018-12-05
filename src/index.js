@@ -45,9 +45,6 @@ const createPlugin = (options = {}) => {
     const wait = Number(options.delay) || 200;
     const maxWait = Number(options.maxDelay) || 1000;
     const points = options.breakpoints || {};
-    const isValidBoundary = (value) => {
-        return (value >= 0 && value < Infinity);
-    };
     const customBreakpoints = [];
 
     Object.keys(points).forEach((mediaName) => {
@@ -55,7 +52,7 @@ const createPlugin = (options = {}) => {
 
         if (boundary.constructor !== Number) {
             throw new TypeError('Breakpoint should be a numeric value.');
-        } else if (!isValidBoundary(boundary)) {
+        } else if (!(boundary >= 0 && boundary < Infinity)) {
             throw new RangeError('Breakpoint should be a non-negative finite value.');
         } else {
             customBreakpoints.push({boundary, mediaName});
