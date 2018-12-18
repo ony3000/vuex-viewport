@@ -22,9 +22,9 @@ const storeModule = {
     },
     getters: {
         mediaName(state) {
-            const section = breakpoints.find((breakpoint) => {
+            const section = breakpoints.filter((breakpoint) => {
                 return breakpoint.boundary <= state.width;
-            });
+            })[0];
 
             return (section ? section.mediaName : 'mobile');
         },
