@@ -42,8 +42,8 @@ const storeModule = {
 const viewport = storeModule;
 
 const createPlugin = (options = {}) => {
-    const wait = Number(options.delay) || 200;
-    const maxWait = Number(options.maxDelay) || 1000;
+    const wait = (Number.isFinite(options.delay) ? options.delay : 200);
+    const maxWait = (Number.isFinite(options.maxDelay) ? options.maxDelay : 1000);
     const points = options.breakpoints || {};
     const customBreakpoints = [];
 
