@@ -1,5 +1,11 @@
 import debounce from 'lodash/debounce';
 
+if (Number.isFinite === undefined) {
+    Number.isFinite = (value) => {
+        return (typeof value === 'number' && isFinite(value));
+    };
+}
+
 // bootstrap-inspired breakpoints.
 let breakpoints = [
     {
