@@ -78,6 +78,7 @@ const createPlugin = (options = {}) => {
         const debouncedMeasure = debounce(instantMeasure, wait, {maxWait});
 
         instantMeasure();
+        window.addEventListener('load', instantMeasure);
         window.addEventListener('resize', debouncedMeasure);
     };
 };
