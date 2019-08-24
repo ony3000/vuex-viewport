@@ -101,10 +101,11 @@ maxDelay | Number | 1000 | The maximum number of milliseconds to wait without me
 breakpoints | Object | { tablet: 768, desktop: 992 } | A set of key-value pairs whose key is the `mediaName` and whose value is the minimum width of the window.
 
 ### Examples
-The first example does not require a separate configuration, and the rest requires module bundler.
+The first example does not require a separate configuration.
 - [Loading library via script tag](https://github.com/ony3000/vuex-viewport/blob/master/demo.html)
 - [CommonJS module require](https://codesandbox.io/s/use-case-commonjs-module-require-u69sj)
 - [ES2015 module import](https://codesandbox.io/s/use-case-es2015-module-import-7qf1t) - This example uses `mapState` helper and  `mapGetters` helper.
+- [Using with Nuxt.js](https://codesandbox.io/s/use-case-using-with-nuxtjs-ewd0t) - This example uses store in modules mode.
 
 ## Caveat
 There are other exports named `viewport` and `viewportPlugin`.  
