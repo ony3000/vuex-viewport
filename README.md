@@ -109,9 +109,9 @@ The first example does not require a separate configuration.
 
 ## Caveat
 There are other exports named `viewport` and `viewportPlugin`.  
-These are the same as `storeModule` and `createPlugin`, respectively.
+These are the same as `storeModule` and `createPlugin` respectively and will be removed in the next major release.
 
-If you using CDN, you can refer to `vuexViewport.viewport` and `vuexViewport.viewportPlugin`, respectively.  
+If you using CDN, you can refer to `vuexViewport.viewport` and `vuexViewport.viewportPlugin`.  
 But I think this notation is bad.  
 Therefore, I encourage use `storeModule` and `createPlugin`.
 
