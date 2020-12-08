@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Example with script tag</title>
-    <script src="https://unpkg.com/es6-promise@4.2.5/dist/es6-promise.auto.js"></script>
-    <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
-    <script src="https://unpkg.com/vuex-viewport@latest/dist/vuex-viewport.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Example with script tag</title>
+  <script src="https://unpkg.com/es6-promise@4.2.5/dist/es6-promise.auto.js"></script>
+  <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+  <script src="https://unpkg.com/vuex-viewport@latest/dist/vuex-viewport.js"></script>
 </head>
 <body>
-    <div id="app">
-        <p>Layout type: {{ layoutType }}</p>
-        <p>Window size: {{ windowWidth }} x {{ windowHeight }}</p>
-    </div>
-    <script>
-    window.addEventListener('load', function () {
-        var pluginOptions = {
-            delay: 200,
-            maxDelay: 1000,
-            breakpoints: {
-                tablet: 768,
-                desktop: 992,
-                largeDesktop: 1200
-            }
-        };
-        var store = new Vuex.Store({
-            modules: {
-                viewport: vuexViewport.storeModule
-            },
-            plugins: [
-                vuexViewport.createPlugin(pluginOptions)
-            ]
-        });
-        new Vue({
-            el: '#app',
-            store: store,
-            computed: {
-                layoutType: function () {
-                    return this.$store.getters['viewport/mediaName'];
-                },
-                windowWidth: function () {
-                    return this.$store.state.viewport.width;
-                },
-                windowHeight: function () {
-                    return this.$store.state.viewport.height;
-                }
-            }
-        });
+  <div id="app">
+    <p>Layout type: {{ layoutType }}</p>
+    <p>Window size: {{ windowWidth }} x {{ windowHeight }}</p>
+  </div>
+  <script>
+  window.addEventListener('load', function () {
+    var pluginOptions = {
+      delay: 200,
+      maxDelay: 1000,
+      breakpoints: {
+        tablet: 768,
+        desktop: 992,
+        largeDesktop: 1200
+      }
+    };
+    var store = new Vuex.Store({
+      modules: {
+        viewport: vuexViewport.storeModule
+      },
+      plugins: [
+        vuexViewport.createPlugin(pluginOptions)
+      ]
     });
-    </script>
+    new Vue({
+      el: '#app',
+      store: store,
+      computed: {
+        layoutType: function () {
+          return this.$store.getters['viewport/mediaName'];
+        },
+        windowWidth: function () {
+          return this.$store.state.viewport.width;
+        },
+        windowHeight: function () {
+          return this.$store.state.viewport.height;
+        }
+      }
+    });
+  });
+  </script>
 </body>
 </html>
