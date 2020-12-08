@@ -1,13 +1,18 @@
 # vuex-viewport
+[![npm](https://img.shields.io/npm/v/vuex-viewport)](https://www.npmjs.com/package/vuex-viewport)
+[![GitHub license](https://img.shields.io/github/license/ony3000/vuex-viewport)](https://github.com/ony3000/vuex-viewport/blob/master/LICENSE)
+[![package hits](https://data.jsdelivr.com/v1/package/npm/vuex-viewport/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vuex-viewport)<br>
 Vuex extension that allows making window size as computed property.
 
+**Note:** This library may not work with Vuex 4.
+
 ## Requirement
-- Vuex 2.3.0+
+- Vuex 2.3.0+ (up to 3.x)
 
 ## Installation
 ### CDN
 ```html
-<script src="https://unpkg.com/vuex-viewport@latest/dist/vuex-viewport.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuex-viewport@1.1.4/dist/vuex-viewport.js"></script>
 ```
 
 ### NPM
@@ -106,14 +111,3 @@ The first example does not require a separate configuration.
 - [CommonJS module require](https://codesandbox.io/s/use-case-commonjs-module-require-u69sj)
 - [ES2015 module import](https://codesandbox.io/s/use-case-es2015-module-import-7qf1t) - This example uses `mapState` helper and  `mapGetters` helper.
 - [Using with Nuxt.js](https://codesandbox.io/s/use-case-using-with-nuxtjs-ewd0t) - This example uses store in modules mode.
-
-## Caveat
-There are other exports named `viewport` and `viewportPlugin`.  
-These are the same as `storeModule` and `createPlugin` respectively and will be removed in the next major release.
-
-If you using CDN, you can refer to `vuexViewport.viewport` and `vuexViewport.viewportPlugin`.  
-But I think this notation is bad.  
-Therefore, I encourage use `storeModule` and `createPlugin`.
-
-## License
-[MIT License](https://github.com/ony3000/vuex-viewport/blob/master/LICENSE)
