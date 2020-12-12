@@ -12,7 +12,7 @@ Vuex extension that allows making window size as computed property.
 ## Installation
 ### CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vuex-viewport@1.1.4/dist/vuex-viewport.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuex-viewport@1.1.5/dist/vuex-viewport.js"></script>
 ```
 
 ### NPM
