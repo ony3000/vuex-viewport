@@ -1,4 +1,23 @@
+import { Store } from 'vuex';
 import debounce from 'lodash/debounce';
+
+interface Breakpoint {
+  boundary: number;
+  mediaName: string;
+}
+
+interface ModuleState {
+  width: number;
+  height: number;
+}
+
+interface PluginOptions {
+  delay?: number;
+  maxDelay?: number;
+  breakpoints?: {
+    [mediaName: string]: number;
+  };
+}
 
 if (Number.isFinite === undefined) {
   Number.isFinite = (value) => {
@@ -7,7 +26,7 @@ if (Number.isFinite === undefined) {
 }
 
 // bootstrap-inspired breakpoints.
-let breakpoints = [
+let breakpoints: Breakpoint[] = [
   {
     boundary: 992,
     mediaName: 'desktop',
@@ -20,14 +39,14 @@ let breakpoints = [
 
 const storeModule = {
   namespaced: true,
-  state() {
+  state(): ModuleState {
     return {
       width: 0,
       height: 0,
     };
   },
   getters: {
-    mediaName(state) {
+    mediaName(state: ModuleState) {
       const section = breakpoints.filter((breakpoint) => {
         return breakpoint.boundary <= state.width;
       })[0];
@@ -36,7 +55,7 @@ const storeModule = {
     },
   },
   mutations: {
-    measure(state) {
+    measure(state: ModuleState) {
       state.width = window.innerWidth;
       state.height = window.innerHeight;
     },
@@ -47,23 +66,34 @@ const storeModule = {
 
 const viewport = storeModule;
 
-const createPlugin = (options = {}) => {
+const createPlugin = (options: PluginOptions = {
+  delay: 200,
+  maxDelay: 1000,
+  breakpoints: {
+    tablet: 768,
+    desktop: 992,
+  },
+}) => {
   const wait = (Number.isFinite(options.delay) ? options.delay : 200);
   const maxWait = (Number.isFinite(options.maxDelay) ? options.maxDelay : 1000);
   const points = options.breakpoints || {};
-  const customBreakpoints = [];
+  const customBreakpoints: Breakpoint[] = [];
 
-  Object.keys(points).forEach((mediaName) => {
-    const boundary = points[mediaName];
-
-    if (boundary.constructor !== Number) {
-      throw new TypeError('Breakpoint should be a numeric value.');
-    } else if (!(boundary >= 0 && boundary < Infinity)) {
-      throw new RangeError('Breakpoint should be a non-negative finite value.');
+  Object.entries(points).forEach(([ mediaName, boundary ]) => {
+    if (typeof boundary === 'number') {
+      if (!(boundary >= 0 && boundary < Infinity)) {
+        throw new RangeError('Breakpoint should be a non-negative finite value.');
+      } else {
+        customBreakpoints.push({
+          boundary,
+          mediaName,
+        });
+      }
     } else {
-      customBreakpoints.push({boundary, mediaName});
+      throw new TypeError('Breakpoint should be a numeric value.');
     }
   });
+
   if (customBreakpoints.length > 0) {
     customBreakpoints.sort((former, latter) => {
       return (latter.boundary - former.boundary);
@@ -71,7 +101,7 @@ const createPlugin = (options = {}) => {
     breakpoints = customBreakpoints;
   }
 
-  return (store) => {
+  return (store: Store<any>) => {
     const instantMeasure = () => {
       store.commit('viewport/measure');
     };
@@ -86,6 +116,7 @@ const createPlugin = (options = {}) => {
 const viewportPlugin = createPlugin;
 
 export {
+  ModuleState,
   storeModule,
   createPlugin,
 
