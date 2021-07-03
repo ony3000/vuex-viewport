@@ -1,36 +1,45 @@
 # vuex-viewport
+
 [![npm](https://img.shields.io/npm/v/vuex-viewport)](https://www.npmjs.com/package/vuex-viewport)
 [![GitHub license](https://img.shields.io/github/license/ony3000/vuex-viewport)](https://github.com/ony3000/vuex-viewport/blob/master/LICENSE)
 [![package hits](https://data.jsdelivr.com/v1/package/npm/vuex-viewport/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vuex-viewport)<br>
 Vuex extension that allows making window size as computed property.
 
-**Note:** This library may not work with Vuex 4.
+**NOTE:** If you use Vue 3, Vuex 4 and TypeScript, see [the section below](#typescript-support).
 
 ## Requirement
-* Vuex 2.3.0+ (up to 3.x)
+
+* Vuex 2.3.0+ (up to 4.x)
 
 ## Installation
+
 ### CDN
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/vuex-viewport@1.1.5/dist/vuex-viewport.js"></script>
 ```
 
 ### NPM
+
 ```sh
 npm install vuex-viewport
 ```
 
 ### Yarn
+
 ```sh
 yarn add vuex-viewport
 ```
 
 ## Usage
+
 ### Outline
+
 1. Add a module and plugin to your store.
 2. Use computed property where necessary.
 
 ### with CDN
+
 See example code [here](./demo.html).
 
 ```html
@@ -64,6 +73,7 @@ new Vue({
 ```
 
 ### without CDN
+
 See example code [here](https://codesandbox.io/s/use-case-es2015-module-import-5tfck) or another example code [using with Nuxt.js](https://codesandbox.io/s/use-case-using-with-nuxtjs-dcubc).
 
 ```javascript
@@ -115,12 +125,13 @@ export default {
       // NOTE: This getter is supported in 1.1.0+
       return this.$store.getters['viewport/mediaName'];
     }
-  },
+  }
 };
 </script>
 ```
 
 ### Configuration
+
 The `createPlugin` has some options (supported in 1.1.0+):
 
 Name | Type | Default | Description
@@ -128,3 +139,89 @@ Name | Type | Default | Description
 delay | Number | 200 | The number of milliseconds to delay to measure the window size. (see [debounce](https://lodash.com/docs/4.17#debounce))
 maxDelay | Number | 1000 | The maximum number of milliseconds to wait without measuring the size of the window if a series of resizing events does not end. (see [debounce](https://lodash.com/docs/4.17#debounce))
 breakpoints | Object | {<br>&nbsp;&nbsp;tablet:&nbsp;768,<br>&nbsp;&nbsp;desktop:&nbsp;992<br>} | A set of key-value pairs whose key is the `mediaName` and whose value is the minimum width of the window.
+
+## TypeScript Support
+
+The following example shows how to use `vuex-viewport` with Composition API.
+
+```typescript
+// store.ts
+
+import { InjectionKey } from 'vue';
+import { createStore, useStore as baseUseStore, Store } from 'vuex';
+import { storeModule, createPlugin, ModuleState } from 'vuex-viewport';
+
+export interface State {
+  foo: number;
+  bar: string;
+
+  // Define as optional property
+  viewport?: ModuleState;
+}
+
+export const key: InjectionKey<Store<State>> = Symbol()
+
+export const store = createStore<State>({
+  state: {
+    foo: 0,
+    bar: 'baz'
+  },
+  modules: {
+    viewport: storeModule
+  },
+  plugins: [
+    createPlugin()
+  ]
+})
+
+export function useStore() {
+  return baseUseStore(key);
+}
+```
+
+```typescript
+// main.ts
+
+import { createApp } from 'vue';
+import { store, key } from 'PATH_OF_YOUR_store.ts';
+import App from 'PATH_OF_YOUR_App.vue';
+
+const app = createApp(App);
+
+app.use(store, key);
+
+app.mount('#app');
+```
+
+```html
+// App.vue
+
+<template>
+  <div>
+    <p>Layout type: {{ layoutType }}</p>
+    <p>Window size: {{ windowWidth }} x {{ windowHeight }}</p>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed } from 'vue';
+import { useStore } from 'PATH_OF_YOUR_store.ts';
+
+export default defineComponent({
+  name: 'App',
+  setup() {
+    const store = useStore();
+
+    const windowWidth = computed(() => store.state.viewport?.width);
+    const windowHeight = computed(() => store.state.viewport?.height);
+    const layoutType = computed(() => store.getters['viewport/mediaName']);
+
+    return {
+      windowWidth,
+      windowHeight,
+      layoutType
+    };
+  }
+});
+</script>
+```
