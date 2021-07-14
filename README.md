@@ -175,9 +175,6 @@ import { createStore } from 'vuex';
 import { storeModule, createPlugin } from 'vuex-viewport';
 
 export const store = createStore({
-  state: {
-    count: 0,
-  },
   modules: {
     viewport: storeModule,
   },
@@ -219,9 +216,6 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'App',
   computed: {
-    storedCount(): number {
-      return this.$store.state.count;
-    },
     windowWidth(): number {
       return this.$store.state.viewport.width;
     },
@@ -260,9 +254,6 @@ import { Options, Vue } from 'vue-class-component';
 
 @Options({
   computed: {
-    storedCount() {
-      return this.$store.state.count;
-    },
     windowWidth() {
       return this.$store.state.viewport.width;
     },
