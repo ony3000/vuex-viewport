@@ -5,6 +5,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'vuex-viewport.js',
+    globalObject: 'this',
     library: 'vuexViewport',
     libraryTarget: 'umd'
   },
