@@ -56,8 +56,10 @@ const storeModule = {
   },
   mutations: {
     measure(state: ModuleState) {
-      state.width = window.innerWidth;
-      state.height = window.innerHeight;
+      if (typeof window !== 'undefined') {
+        state.width = window.innerWidth;
+        state.height = window.innerHeight;
+      }
     },
   },
   actions: {
@@ -107,9 +109,11 @@ const createPlugin = (options: PluginOptions = {
     };
     const debouncedMeasure = debounce(instantMeasure, wait, {maxWait});
 
-    instantMeasure();
-    window.addEventListener('load', instantMeasure);
-    window.addEventListener('resize', debouncedMeasure);
+    if (typeof window !== 'undefined') {
+      instantMeasure();
+      window.addEventListener('load', instantMeasure);
+      window.addEventListener('resize', debouncedMeasure);
+    }
   };
 };
 
