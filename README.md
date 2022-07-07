@@ -1,5 +1,11 @@
 # vuex-viewport
 
+:warning: This repository is no longer maintained. :warning:
+
+Because the official state management library for Vue has changed to [Pinia](https://pinia.vuejs.org).
+
+---
+
 [![npm](https://img.shields.io/npm/v/vuex-viewport)](https://www.npmjs.com/package/vuex-viewport)
 [![GitHub license](https://img.shields.io/github/license/ony3000/vuex-viewport)](https://github.com/ony3000/vuex-viewport/blob/master/LICENSE)
 [![package hits](https://data.jsdelivr.com/v1/package/npm/vuex-viewport/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vuex-viewport)<br>
